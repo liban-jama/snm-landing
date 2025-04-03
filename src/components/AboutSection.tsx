@@ -3,11 +3,26 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 
 const AboutSection = () => {
+  const processSteps = [
+    {
+      label: "Engage as Your Billing Department",
+      description: "Patients recognize us as an extension of your team."
+    },
+    {
+      label: "Customized Recovery Process",
+      description: "Tailored to your practice & patient needs."
+    },
+    {
+      label: "Results Without Hassle",
+      description: "You focus on care, we handle collections."
+    }
+  ];
+
   const companyStats = [
     { label: "Years Experience", value: "30+" },
-    { label: "Healthcare Clients", value: "500+" },
-    { label: "Recovery Rate", value: "95%" },
-    { label: "Staff Certifications", value: "100%" }
+    { label: "First-Party Specialists", value: "100%" },
+    { label: "Recovery Focus", value: "Patient Trust" },
+    { label: "Collections Strategy", value: "Non-Aggressive" }
   ];
 
   return (
@@ -16,43 +31,24 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              About <span className="text-gradient">SNM Collections</span>
+              Get Paid Faster <span className="text-gradient">Without Losing Patients</span>
             </h2>
             <p className="text-gray-700 text-lg mb-6">
-              Since our founding, SNM Collections has specialized exclusively in healthcare debt recovery. 
-              We understand the unique challenges of medical billing and collections, from complex insurance 
-              issues to patient financial hardship.
-            </p>
-            <p className="text-gray-700 text-lg mb-6">
-              Our approach balances effective collections with compassionate patient communication, 
-              helping healthcare providers maintain their reputation while improving their bottom line.
+              We recover what's owed—without aggressive tactics—ensuring you maintain 
+              your reputation and keep patients coming back. Our approach is built on 
+              trust, compliance, and patient-centered communication.
             </p>
             
             <div className="space-y-4">
-              <div className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-snmteal-500 mr-3 mt-1" />
-                <p className="text-gray-700">
-                  <span className="font-semibold">Healthcare Specialization:</span> Focused exclusively on medical debt recovery
-                </p>
-              </div>
-              <div className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-snmteal-500 mr-3 mt-1" />
-                <p className="text-gray-700">
-                  <span className="font-semibold">Regulatory Expertise:</span> Full compliance with HIPAA, FDCPA and state regulations
-                </p>
-              </div>
-              <div className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-snmteal-500 mr-3 mt-1" />
-                <p className="text-gray-700">
-                  <span className="font-semibold">Patient-Centered Approach:</span> Respectful communication that preserves relationships
-                </p>
-              </div>
-              <div className="flex items-start">
-                <CheckCircle className="h-5 w-5 text-snmteal-500 mr-3 mt-1" />
-                <p className="text-gray-700">
-                  <span className="font-semibold">Advanced Technology:</span> Secure systems that protect patient data
-                </p>
-              </div>
+              {processSteps.map((step, index) => (
+                <div key={index} className="flex items-start">
+                  <CheckCircle className="h-5 w-5 text-snmteal-500 mr-3 mt-1" />
+                  <div>
+                    <p className="font-semibold text-gray-800">{step.label}</p>
+                    <p className="text-gray-600">{step.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
           
@@ -68,10 +64,10 @@ const AboutSection = () => {
             <div className="col-span-2">
               <Card className="border-gray-100 shadow-sm bg-gradient-to-r from-snmblue-600 to-snmteal-500 text-white">
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-3">Our Mission</h3>
+                  <h3 className="text-xl font-bold mb-3">Our Promise</h3>
                   <p>
-                    To help healthcare providers thrive financially while maintaining the highest 
-                    standards of patient care and ethical collections practices.
+                    We turn outstanding medical receivables into consistent cash flow, 
+                    while preserving the trust and dignity of your patient relationships.
                   </p>
                 </CardContent>
               </Card>
@@ -84,3 +80,4 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
+
