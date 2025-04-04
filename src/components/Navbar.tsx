@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,9 +16,9 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-8">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <a href="#" className="text-2xl font-bold text-snmblue-700">
+            <Link to="/" className="text-2xl font-bold text-snmblue-700">
               SNM <span className="text-snmteal-600">Collections</span>
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
@@ -27,9 +28,6 @@ const Navbar = () => {
             </a>
             <a href="#benefits" className="text-gray-600 hover:text-snmblue-600 transition-colors">
               Benefits
-            </a>
-            <a href="#testimonials" className="text-gray-600 hover:text-snmblue-600 transition-colors">
-              Testimonials
             </a>
             <a href="#about" className="text-gray-600 hover:text-snmblue-600 transition-colors">
               About Us
@@ -64,13 +62,6 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Benefits
-              </a>
-              <a
-                href="#testimonials"
-                className="text-gray-600 hover:text-snmblue-600 py-2 transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Testimonials
               </a>
               <a
                 href="#about"
