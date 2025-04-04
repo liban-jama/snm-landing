@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -8,9 +9,11 @@ import {
   ArrowRight 
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 
 const ContactSection = () => {
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,10 +34,19 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formRef.current) return;
+    
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    // Use EmailJS to send the email
+    emailjs.sendForm(
+      'YOUR_SERVICE_ID', // Replace with your EmailJS Service ID
+      'YOUR_TEMPLATE_ID', // Replace with your EmailJS Template ID
+      formRef.current,
+      'YOUR_PUBLIC_KEY' // Replace with your EmailJS Public Key
+    )
+    .then(() => {
       setIsSubmitting(false);
       toast({
         title: "Message Sent",
@@ -49,7 +61,16 @@ const ContactSection = () => {
         organization: "",
         message: ""
       });
-    }, 1500);
+    })
+    .catch((error) => {
+      console.error("Email sending failed:", error);
+      setIsSubmitting(false);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    });
   };
 
   return (
@@ -106,7 +127,7 @@ const ContactSection = () => {
           <div className="bg-white rounded-lg shadow-md border border-gray-100 p-8">
             <h3 className="text-2xl font-semibold mb-6">Send Us a Message</h3>
             
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                 <div className="sm:col-span-2">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
