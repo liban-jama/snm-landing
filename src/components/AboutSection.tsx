@@ -22,7 +22,7 @@ const AboutSection = () => {
     { label: "Years Experience", value: "30+" },
     { label: "First-Party Specialists", value: "100%" },
     { label: "Recovery Focus", value: "Patient Trust" },
-    { label: "Collections Strategy", value: "Non-Aggressive" }
+    { label: "Collections Strategy", value: "Effective" }
   ];
 
   return (
@@ -37,6 +37,12 @@ const AboutSection = () => {
               We recover what's owed—without aggressive tactics—ensuring you maintain 
               your reputation and keep patients coming back. Our approach is built on 
               trust, compliance, and patient-centered communication.
+            </p>
+            
+            <p className="text-gray-700 text-lg mb-6">
+              For accounts requiring stronger action, we report to major credit bureaus 
+              after a defined period and can facilitate legal action through our network 
+              of partnered debt collection attorneys when necessary.
             </p>
             
             <div className="space-y-4">
@@ -80,4 +86,3 @@ const AboutSection = () => {
 };
 
 export default AboutSection;
-

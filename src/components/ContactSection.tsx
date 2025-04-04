@@ -1,13 +1,10 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { 
-  Phone, 
   Mail, 
   MapPin, 
-  Clock, 
   ArrowRight 
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -74,18 +71,10 @@ const ContactSection = () => {
             
             <div className="space-y-6">
               <div className="flex items-start">
-                <Phone className="h-6 w-6 mr-4 flex-shrink-0" />
-                <div>
-                  <p className="font-medium text-lg">Phone</p>
-                  <p className="text-snmblue-100">(888) 555-6789</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
                 <Mail className="h-6 w-6 mr-4 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-lg">Email</p>
-                  <p className="text-snmblue-100">contact@snmcollections.com</p>
+                  <p className="text-snmblue-100">info@snmcollections.com</p>
                 </div>
               </div>
               
@@ -93,15 +82,7 @@ const ContactSection = () => {
                 <MapPin className="h-6 w-6 mr-4 flex-shrink-0" />
                 <div>
                   <p className="font-medium text-lg">Address</p>
-                  <p className="text-snmblue-100">123 Medical Plaza, Suite 400<br />Chicago, IL 60601</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <Clock className="h-6 w-6 mr-4 flex-shrink-0" />
-                <div>
-                  <p className="font-medium text-lg">Business Hours</p>
-                  <p className="text-snmblue-100">Monday - Friday: 8:00 AM - 6:00 PM<br />Saturday: 9:00 AM - 1:00 PM</p>
+                  <p className="text-snmblue-100">1001 SOUTH MAIN SUITE 700<br />KALISPELL, MT 59901</p>
                 </div>
               </div>
             </div>
@@ -115,8 +96,8 @@ const ContactSection = () => {
                 asChild 
                 className="bg-white text-snmblue-600 hover:bg-gray-100"
               >
-                <a href="tel:8885556789" className="flex items-center">
-                  Call Now <ArrowRight className="ml-2 h-4 w-4" />
+                <a href="mailto:info@snmcollections.com" className="flex items-center">
+                  Email Now <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
             </div>

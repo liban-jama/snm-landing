@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const FooterSection = () => {
   const currentYear = new Date().getFullYear();
@@ -53,10 +54,10 @@ const FooterSection = () => {
                 <a href="#services" className="text-gray-300 hover:text-white">Insurance Resolution</a>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Data Analytics</a>
+                <a href="#services" className="text-gray-300 hover:text-white">Credit Bureau Reporting</a>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Patient Communication</a>
+                <a href="#services" className="text-gray-300 hover:text-white">Legal Action Facilitation</a>
               </li>
             </ul>
           </div>
@@ -71,13 +72,10 @@ const FooterSection = () => {
                 <a href="#" className="text-gray-300 hover:text-white">Careers</a>
               </li>
               <li>
-                <a href="#testimonials" className="text-gray-300 hover:text-white">Testimonials</a>
+                <Link to="/privacy-policy" className="text-gray-300 hover:text-white">Privacy Policy</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white">Terms of Service</a>
+                <Link to="/terms-of-service" className="text-gray-300 hover:text-white">Terms of Service</Link>
               </li>
             </ul>
           </div>
@@ -109,10 +107,10 @@ const FooterSection = () => {
             <div className="mt-4 md:mt-0">
               <ul className="flex space-x-6">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a>
+                  <Link to="/privacy-policy" className="text-gray-400 hover:text-white">Privacy Policy</Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">Terms of Service</a>
+                  <Link to="/terms-of-service" className="text-gray-400 hover:text-white">Terms of Service</Link>
                 </li>
                 <li>
                   <a href="#" className="text-gray-400 hover:text-white">Sitemap</a>
