@@ -23,17 +23,17 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#services" className="text-gray-600 hover:text-snmblue-600 transition-colors">
+            <Link to="/#services" className="text-gray-600 hover:text-snmblue-600 transition-colors">
               Services
-            </a>
-            <a href="#benefits" className="text-gray-600 hover:text-snmblue-600 transition-colors">
+            </Link>
+            <Link to="/#benefits" className="text-gray-600 hover:text-snmblue-600 transition-colors">
               Benefits
-            </a>
-            <a href="#about" className="text-gray-600 hover:text-snmblue-600 transition-colors">
+            </Link>
+            <Link to="/#about" className="text-gray-600 hover:text-snmblue-600 transition-colors">
               About Us
-            </a>
+            </Link>
             <Button asChild className="bg-snmblue-600 hover:bg-snmblue-700">
-              <a href="#contact">Contact Us</a>
+              <Link to="/#contact">Contact Us</Link>
             </Button>
           </div>
 
@@ -49,33 +49,33 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden mt-4 pb-2 animate-fade-in">
             <div className="flex flex-col space-y-3">
-              <a
-                href="#services"
+              <Link
+                to="/#services"
                 className="text-gray-600 hover:text-snmblue-600 py-2 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Services
-              </a>
-              <a
-                href="#benefits"
+              </Link>
+              <Link
+                to="/#benefits"
                 className="text-gray-600 hover:text-snmblue-600 py-2 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Benefits
-              </a>
-              <a
-                href="#about"
+              </Link>
+              <Link
+                to="/#about"
                 className="text-gray-600 hover:text-snmblue-600 py-2 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 About Us
-              </a>
+              </Link>
               <Button 
                 asChild 
                 className="bg-snmblue-600 hover:bg-snmblue-700 w-full"
                 onClick={() => setIsOpen(false)}
               >
-                <a href="#contact">Contact Us</a>
+                <Link to="/#contact">Contact Us</Link>
               </Button>
             </div>
           </div>

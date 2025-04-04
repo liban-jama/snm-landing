@@ -45,19 +45,19 @@ const FooterSection = () => {
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Medical Debt Collection</a>
+                <Link to="/#services" className="text-gray-300 hover:text-white">Medical Debt Collection</Link>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Early-Out Programs</a>
+                <Link to="/#services" className="text-gray-300 hover:text-white">Early-Out Programs</Link>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Insurance Resolution</a>
+                <Link to="/#services" className="text-gray-300 hover:text-white">Insurance Resolution</Link>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Credit Bureau Reporting</a>
+                <Link to="/#services" className="text-gray-300 hover:text-white">Credit Bureau Reporting</Link>
               </li>
               <li>
-                <a href="#services" className="text-gray-300 hover:text-white">Legal Action Facilitation</a>
+                <Link to="/#services" className="text-gray-300 hover:text-white">Legal Action Facilitation</Link>
               </li>
             </ul>
           </div>
@@ -66,10 +66,10 @@ const FooterSection = () => {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-3">
               <li>
-                <a href="#about" className="text-gray-300 hover:text-white">About Us</a>
+                <Link to="/#about" className="text-gray-300 hover:text-white">About Us</Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white">Careers</a>
+                <Link to="/#benefits" className="text-gray-300 hover:text-white">Benefits</Link>
               </li>
               <li>
                 <Link to="/privacy-policy" className="text-gray-300 hover:text-white">Privacy Policy</Link>
@@ -113,7 +113,7 @@ const FooterSection = () => {
                   <Link to="/terms-of-service" className="text-gray-400 hover:text-white">Terms of Service</Link>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">Sitemap</a>
+                  <Link to="/" className="text-gray-400 hover:text-white">Home</Link>
                 </li>
               </ul>
             </div>
