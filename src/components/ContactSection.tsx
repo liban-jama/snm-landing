@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,7 +34,8 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
+    // The form submission is handled by Netlify
+    // This code runs after the form is submitted
     setTimeout(() => {
       setIsSubmitting(false);
       toast({
@@ -106,7 +108,21 @@ const ContactSection = () => {
           <div className="bg-white rounded-lg shadow-md border border-gray-100 p-8">
             <h3 className="text-2xl font-semibold mb-6">Send Us a Message</h3>
             
-            <form onSubmit={handleSubmit}>
+            <form 
+              name="contact" 
+              method="POST" 
+              data-netlify="true" 
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+            >
+              {/* Netlify form hidden fields */}
+              <input type="hidden" name="form-name" value="contact" />
+              <p className="hidden">
+                <label>
+                  Don't fill this out if you're human: <input name="bot-field" />
+                </label>
+              </p>
+              
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                 <div className="sm:col-span-2">
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
