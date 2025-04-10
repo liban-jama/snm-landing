@@ -25,6 +25,12 @@ const ContactForm = () => {
     }));
   };
 
+  const encode = (data: Record<string, string>) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -33,24 +39,43 @@ const ContactForm = () => {
     
     setIsSubmitting(true);
     
-    // This function will run after Netlify's form handler
-    // The form submission is actually handled by Netlify's built-in form handling
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: "Message Sent",
-        description: "Thank you for contacting SNM Collections. We'll be in touch soon.",
+    // Create form data object with form-name included
+    const formDataToSend = {
+      "form-name": "contact",
+      ...formData
+    };
+
+    // Submit the form data to Netlify
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode(formDataToSend)
+    })
+      .then(() => {
+        setIsSubmitting(false);
+        toast({
+          title: "Message Sent",
+          description: "Thank you for contacting SNM Collections. We'll be in touch soon.",
+        });
+        
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          organization: "",
+          message: ""
+        });
+      })
+      .catch(error => {
+        setIsSubmitting(false);
+        console.error("Form submission error:", error);
+        toast({
+          title: "Submission Error",
+          description: "There was a problem sending your message. Please try again.",
+          variant: "destructive"
+        });
       });
-      
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        organization: "",
-        message: ""
-      });
-    }, 1500);
   };
 
   return (
