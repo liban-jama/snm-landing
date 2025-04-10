@@ -57,16 +57,15 @@ const ContactForm = () => {
     <div className="bg-white rounded-lg shadow-md border border-gray-100 p-8">
       <h3 className="text-2xl font-semibold mb-6">Send Us a Message</h3>
       
-      {/* Important: form must have the netlify attribute AND the hidden input fields */}
       <form 
         name="contact" 
         method="POST" 
-        netlify="true"
         data-netlify="true"
         onSubmit={handleSubmit}
       >
         {/* Required for Netlify form detection */}
         <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="bot-field" />
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
           <div className="sm:col-span-2">
