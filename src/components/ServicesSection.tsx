@@ -8,7 +8,8 @@ import {
   MessageSquare, 
   Wallet,
   Gavel,
-  CreditCard
+  CreditCard,
+  Calendar
 } from "lucide-react";
 
 const services = [
