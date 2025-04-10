@@ -1,8 +1,8 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
 
 const testimonials = [
   {
@@ -29,20 +29,33 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+
+  useEffect(() => {
+    if (!autoplay) return;
+    
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [autoplay]);
 
   const nextTestimonial = () => {
+    setAutoplay(false);
     setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
+    setAutoplay(false);
     setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
-    <section id="testimonials" className="py-20 bg-white">
+    <section id="testimonials" className="section-padding bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="font-bold mb-4">
             What Our <span className="text-gradient">Clients Say</span>
           </h2>
           <p className="text-gray-600 text-lg">
@@ -51,14 +64,15 @@ const TestimonialsSection = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <Card className="border-gray-100 shadow-md">
-            <CardContent className="p-8">
+          <Card className="border-0 shadow-xl overflow-hidden bg-white rounded-2xl">
+            <CardContent className="p-10 relative">
+              <Quote className="absolute top-4 left-4 h-24 w-24 text-gray-100 opacity-50" />
               <div className="flex justify-center mb-6">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="h-6 w-6 text-yellow-400 fill-yellow-400" />
                 ))}
               </div>
-              <blockquote className="text-xl md:text-2xl text-center text-gray-700 italic mb-6">
+              <blockquote className="text-xl md:text-2xl text-center text-gray-700 italic mb-8 relative z-10">
                 "{testimonials[activeIndex].quote}"
               </blockquote>
               <div className="text-center">
@@ -68,12 +82,12 @@ const TestimonialsSection = () => {
             </CardContent>
           </Card>
 
-          <div className="flex justify-center mt-6 space-x-2">
+          <div className="flex justify-center mt-8 space-x-2">
             <Button
               variant="outline"
               size="icon"
               onClick={prevTestimonial}
-              className="rounded-full border-gray-300"
+              className="rounded-full border-gray-300 h-12 w-12"
             >
               <ChevronLeft className="h-5 w-5" />
             </Button>
@@ -81,10 +95,13 @@ const TestimonialsSection = () => {
               {testimonials.map((_, index) => (
                 <button
                   key={index}
-                  className={`h-2 rounded-full ${
-                    activeIndex === index ? "w-6 bg-snmblue-600" : "w-2 bg-gray-300"
-                  } transition-all`}
-                  onClick={() => setActiveIndex(index)}
+                  className={`h-3 rounded-full transition-all duration-300 ${
+                    activeIndex === index ? "w-10 bg-gradient-to-r from-snmblue-500 to-snmteal-500" : "w-3 bg-gray-300"
+                  }`}
+                  onClick={() => {
+                    setAutoplay(false);
+                    setActiveIndex(index);
+                  }}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
@@ -93,7 +110,7 @@ const TestimonialsSection = () => {
               variant="outline"
               size="icon"
               onClick={nextTestimonial}
-              className="rounded-full border-gray-300"
+              className="rounded-full border-gray-300 h-12 w-12"
             >
               <ChevronRight className="h-5 w-5" />
             </Button>

@@ -33,7 +33,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 205 100% 45%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -91,14 +91,71 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tighter;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl;
   }
 }
 
 .hover-scale {
-  @apply transition-transform duration-200 hover:scale-105;
+  @apply transition-transform duration-300 hover:scale-105;
 }
 
 .text-gradient {
   @apply bg-gradient-to-r from-snmblue-600 to-snmteal-500 bg-clip-text text-transparent;
+}
+
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+.card-shine {
+  @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[card-shine_2.5s_ease-in-out_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent;
+}
+
+.glass-card {
+  @apply backdrop-blur-sm bg-white/90 border border-white/20 shadow-xl;
+}
+
+@keyframes card-shine {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(400%);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.cta-button {
+  @apply bg-gradient-to-r from-snmblue-600 to-snmteal-600 hover:from-snmblue-700 hover:to-snmteal-700 text-white font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-lg transition-all duration-300;
 }

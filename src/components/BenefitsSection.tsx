@@ -30,10 +30,12 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <section id="benefits" className="py-20 bg-gray-50">
+    <section id="benefits" className="section-padding relative bg-white">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(var(--snmblue-50),0.3),transparent)] -z-10" />
+      
       <div className="container mx-auto px-4 md:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="font-bold mb-4">
             Why Healthcare Providers <span className="text-gradient">Choose Us</span>
           </h2>
           <p className="text-gray-600 text-lg">
@@ -46,12 +48,14 @@ const BenefitsSection = () => {
           {benefits.map((benefit, index) => (
             <div 
               key={index} 
-              className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+              className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group"
             >
               <div className="flex items-start">
-                <CheckCircle className="h-6 w-6 text-snmteal-500 mr-3 flex-shrink-0 mt-1" />
+                <div className="p-2 rounded-full bg-snmteal-50 mr-4 group-hover:bg-snmteal-100 transition-colors">
+                  <CheckCircle className="h-7 w-7 text-snmteal-500 flex-shrink-0" />
+                </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{benefit.title}</h3>
+                  <h3 className="text-xl font-semibold mb-3">{benefit.title}</h3>
                   <p className="text-gray-600">{benefit.description}</p>
                 </div>
               </div>
