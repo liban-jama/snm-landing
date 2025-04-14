@@ -11,6 +11,8 @@ import {
   CreditCard,
   Calendar
 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 const services = [
   {
@@ -45,29 +47,6 @@ const services = [
   }
 ];
 
-const benefits = [
-  {
-    title: "Only Pay If We Collect",
-    description: "We don't charge a cent until we recover what you're owed."
-  },
-  {
-    title: "Preserve Your Reputation",
-    description: "Patients are treated professionally and respectfully, even when bills go unpaid."
-  },
-  {
-    title: "Accelerate Your Cash Flow",
-    description: "Get faster returns on delinquent accounts without lifting a finger."
-  },
-  {
-    title: "Reduce Admin Load",
-    description: "Free your team from chasing unpaid bills. We handle it all."
-  },
-  {
-    title: "Stay Compliant",
-    description: "We're fully HIPAA, FDCPA, and TCPA compliant — and always up to date with healthcare regulations."
-  }
-];
-
 const clients = [
   "Hospitals",
   "Urgent Care Clinics",
@@ -77,147 +56,237 @@ const clients = [
   "Billing Companies"
 ];
 
+const fadeInUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: [0.215, 0.61, 0.355, 1]
+    }
+  })
+};
+
+const cardHoverVariants = {
+  hover: {
+    y: -10,
+    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  }
+};
+
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-20 bg-white">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            What <span className="text-gradient">We Do</span>
+    <section id="services" className="py-20 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(var(--snmblue-300),0.2),transparent)] pointer-events-none"></div>
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_right,rgba(var(--snmteal-300),0.2),transparent)] pointer-events-none"></div>
+      
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            What <span className="relative">
+              <span className="text-gradient relative z-10">We Do</span>
+              <span className="absolute -bottom-2 left-0 right-0 h-3 bg-snmteal-200/50 -z-0 rounded-full transform -rotate-1"></span>
+            </span>
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-xl">
             SNM Collections offers comprehensive debt recovery solutions tailored 
             specifically for the healthcare industry.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
           {services.map((service, index) => (
-            <Card key={index} className="hover-scale border-gray-100 shadow-sm">
-              <CardHeader className="pb-2">
-                <div className="h-12 w-12 rounded-lg bg-snmblue-100 flex items-center justify-center mb-4">
-                  <service.icon className="h-6 w-6 text-snmblue-600" />
-                </div>
-                <CardTitle>{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-gray-600 text-base">
-                  {service.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <motion.div
+              key={index}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={fadeInUpVariants}
+            >
+              <motion.div variants={cardHoverVariants}>
+                <Card className="border-0 bg-white/80 backdrop-blur-sm shadow-lg h-full overflow-hidden group">
+                  <CardHeader className="pb-2 relative">
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-snmblue-400 to-snmteal-400 transform origin-left transition-transform duration-300 group-hover:scale-x-100 scale-x-0"></div>
+                    <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-snmblue-100 to-snmblue-200 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                      <service.icon className="h-8 w-8 text-snmblue-600" />
+                    </div>
+                    <CardTitle className="text-2xl">{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-gray-600 text-base">
+                      {service.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why Healthcare Providers <span className="text-gradient">Choose Us</span>
-          </h2>
-          <p className="text-gray-600 text-lg">
-            We understand the unique challenges healthcare providers face with unpaid accounts.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
-          {benefits.map((benefit, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm hover-scale">
-              <div className="flex items-start mb-4">
-                <div className="flex-shrink-0 mr-3">
-                  <div className="h-8 w-8 rounded-full bg-snmteal-100 flex items-center justify-center">
-                    <ShieldCheck className="h-4 w-4 text-snmteal-600" />
-                  </div>
-                </div>
-                <h3 className="text-xl font-semibold">{benefit.title}</h3>
-              </div>
-              <p className="text-gray-600">{benefit.description}</p>
-            </div>
-          ))}
-        </div>
-        
-        <div className="bg-gradient-to-r from-snmblue-50 to-snmteal-50 rounded-2xl p-8 md:p-12 mb-24">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-gradient-to-r from-snmblue-50/80 to-snmteal-50/80 rounded-3xl p-8 md:p-12 mb-24 backdrop-blur-sm shadow-xl border border-white/30"
+        >
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">How It Works</h2>
-            <p className="text-gray-600">Our simple process gets you paid faster with minimal effort on your part.</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-gray-600 text-lg">Our simple process gets you paid faster with minimal effort on your part.</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white text-snmblue-600 text-2xl font-bold mb-4 shadow-sm">1</div>
-              <h3 className="text-xl font-semibold mb-2">Schedule a Free Consultation</h3>
-              <p className="text-gray-600">We'll review your current A/R and pain points.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white text-snmblue-600 text-2xl font-bold mb-4 shadow-sm">2</div>
-              <h3 className="text-xl font-semibold mb-2">Get a Custom Collection Plan</h3>
-              <p className="text-gray-600">Tailored to your practice's size, specialties, and patient demographics.</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="inline-flex items-center justify-center h-16 w-16 rounded-full bg-white text-snmblue-600 text-2xl font-bold mb-4 shadow-sm">3</div>
-              <h3 className="text-xl font-semibold mb-2">We Start Collecting</h3>
-              <p className="text-gray-600">You get paid when we recover — nothing out of pocket.</p>
-            </div>
+            {[
+              {step: 1, title: "Schedule a Free Consultation", desc: "We'll review your current A/R and pain points."},
+              {step: 2, title: "Get a Custom Collection Plan", desc: "Tailored to your practice's size, specialties, and patient demographics."},
+              {step: 3, title: "We Start Collecting", desc: "You get paid when we recover — nothing out of pocket."}
+            ].map((item, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+                className="text-center relative"
+              >
+                <div className="inline-flex items-center justify-center h-20 w-20 rounded-2xl bg-white text-snmblue-600 text-2xl font-bold mb-4 shadow-md relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-snmblue-100 to-snmteal-100 opacity-60"></div>
+                  <span className="relative z-10">{item.step}</span>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+                
+                {i < 2 && (
+                  <div className="hidden md:block absolute top-10 right-0 w-24 h-px bg-gradient-to-r from-snmblue-200 to-transparent"></div>
+                )}
+              </motion.div>
+            ))}
           </div>
           
-          <div className="text-center mt-12">
-            <a href="https://cal.com/snmcollections/discovery" className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-snmblue-600 hover:bg-snmblue-700">
-              <Calendar className="mr-2 h-5 w-5" />
-              Book Your Free Strategy Call
-            </a>
-          </div>
-        </div>
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Button asChild size="lg" className="bg-gradient-to-r from-snmblue-600 to-snmteal-600 hover:from-snmblue-700 hover:to-snmteal-700 text-white font-medium py-6 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group">
+              <a href="https://cal.com/snmcollections/discovery" className="flex items-center text-lg">
+                <Calendar className="mr-3 h-5 w-5 group-hover:animate-bounce" />
+                Book Your Free Strategy Call
+              </a>
+            </Button>
+          </motion.div>
+        </motion.div>
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Who We <span className="text-gradient">Work With</span>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
+            Who We <span className="relative">
+              <span className="text-gradient relative z-10">Work With</span>
+              <span className="absolute -bottom-2 left-0 right-0 h-3 bg-snmteal-200/50 -z-0 rounded-full transform -rotate-1"></span>
+            </span>
           </h2>
-          <p className="text-gray-600 text-lg mb-8">
+          <p className="text-gray-600 text-xl mb-8">
             We partner with healthcare providers of all sizes and specialties.
           </p>
           
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {clients.map((client, index) => (
-              <div key={index} className="bg-gray-50 py-4 px-6 rounded-lg border border-gray-100">
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                whileHover={{ y: -5, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)" }}
+                className="bg-white py-4 px-6 rounded-xl border border-gray-100 shadow-sm hover:border-snmblue-200 transition-all duration-200"
+              >
                 <p className="font-semibold text-gray-700">{client}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
           
-          <p className="text-gray-600 mt-8 font-semibold">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-gray-600 mt-8 font-semibold"
+          >
             If your patients owe you — we can help recover what's rightfully yours.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         
-        <div className="bg-white rounded-lg p-8 border border-gray-100 shadow-sm mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-center">Your Brand. Still Protected.</h2>
-          <p className="text-gray-600 text-center">
-            As a third-party agency, we represent your organization with the same professionalism 
-            you'd expect from your own staff. Patients get reminders, payment options, and 
-            communication that reflect positively on your practice — even during collections.
-          </p>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl p-10 border border-gray-100 shadow-xl mb-12 relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-snmblue-50/50 to-snmteal-50/50 -z-0"></div>
+          <div className="relative z-10">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-center">Your Brand. Still Protected.</h2>
+            <p className="text-gray-600 text-center text-lg">
+              As a third-party agency, we represent your organization with the same professionalism 
+              you'd expect from your own staff. Patients get reminders, payment options, and 
+              communication that reflect positively on your practice — even during collections.
+            </p>
+          </div>
+        </motion.div>
         
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6 text-center">Frequently Asked Questions</h2>
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-3xl mx-auto"
+        >
+          <h2 className="text-3xl font-bold mb-8 text-center">Frequently Asked Questions</h2>
           
           <div className="space-y-6">
-            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">How do your fees work?</h3>
-              <p className="text-gray-600">We work on a contingency basis. That means if we don't collect, you don't pay.</p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">Will patients know you're a third-party agency?</h3>
-              <p className="text-gray-600">Yes, but we operate with discretion, respect, and care — always protecting your brand.</p>
-            </div>
-            
-            <div className="bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
-              <h3 className="text-xl font-semibold mb-2">What types of accounts do you accept?</h3>
-              <p className="text-gray-600">We accept everything from early-stage delinquencies to aged receivables and insurance denials.</p>
-            </div>
+            {[
+              {q: "How do your fees work?", a: "We work on a contingency basis. That means if we don't collect, you don't pay."},
+              {q: "Will patients know you're a third-party agency?", a: "Yes, but we operate with discretion, respect, and care — always protecting your brand."},
+              {q: "What types of accounts do you accept?", a: "We accept everything from early-stage delinquencies to aged receivables and insurance denials."}
+            ].map((faq, i) => (
+              <motion.div 
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white p-8 rounded-xl border border-gray-100 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <h3 className="text-xl font-semibold mb-3">{faq.q}</h3>
+                <p className="text-gray-600">{faq.a}</p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
