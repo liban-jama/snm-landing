@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ServicesSection from "@/components/ServicesSection";
@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const [showStickyCta, setShowStickyCta] = useState(false);
+  const [animationsLoaded, setAnimationsLoaded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,7 +25,16 @@ const Index = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Enable animations after initial render
+    const timer = setTimeout(() => {
+      setAnimationsLoaded(true);
+    }, 100);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -39,15 +49,15 @@ const Index = () => {
       </main>
       <FooterSection />
       
-      {/* Sticky CTA button */}
+      {/* Sticky CTA button with reduced animation complexity */}
       <AnimatePresence>
         {showStickyCta && (
           <motion.div
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="sticky-cta"
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="sticky-cta hardware-accelerated"
           >
             <Button asChild size="lg" className="bg-gradient-to-r from-snmblue-600 to-snmteal-600 hover:from-snmblue-700 hover:to-snmteal-700 text-white font-semibold py-5 px-6 rounded-full shadow-xl group">
               <a href="https://cal.com/snmcollections/discovery" className="flex items-center">

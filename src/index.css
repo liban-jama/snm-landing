@@ -148,6 +148,41 @@
   @apply py-16 md:py-24;
 }
 
+/* Add will-change for better performance on animations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+.hardware-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Reduce animation complexity for mobile */
+@media (max-width: 768px) {
+  .reduced-motion {
+    transition-duration: 0.2s !important;
+    animation-duration: 0.2s !important;
+  }
+  
+  .disable-animation-mobile {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Optimize animation performance */
+.optimize-animation {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
 .card-shine {
   @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[card-shine_2.5s_ease-in-out_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent;
 }
@@ -316,4 +351,3 @@
 .gradient-border-bottom:hover::after {
   transform: scaleX(1);
 }
-
