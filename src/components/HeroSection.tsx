@@ -1,11 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden">
+    <section className="relative pt-24 pb-24 md:pt-32 md:pb-32 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(var(--snmblue-100),0.8),transparent_70%)]"></div>
       
